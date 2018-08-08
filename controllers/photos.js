@@ -44,7 +44,10 @@ module.exports = {
       route: '/api/photos/:id'
     */
     const roomId = req.params.id;
-    db.Photo.updateOne({ room_id: roomId }, req.body, (err) => {
+    const description = req.params.description;
+    const verified = req.params.verified;
+    const photo_url = req.params.photo_url;
+    db.Photo.find({ room_id: roomId }).replaceOne({ room_id: roomId, description: description, verified: verified, photo_url: photo_url}, (err) => {
       if (err) return res.status(405).send(err);
       res.send('Success updating data!');
     })
