@@ -2,33 +2,33 @@ const fs = require('fs');
 const faker = require('faker');
 
 const PHOTO_URL = 'https://s3-us-west-1.amazonaws.com/hackerbnbphotos/file-';
-const MAX_ID_RANGE = 100;
-const MAX_IMG_RANGE = 10;
+
+faker.seed(100);
 
 const getRandomIntInclusive = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
-}
+};
+
+let header = 'room_id, room_name, photo_url, description, verified';
+console.log(header);
 
 const photos = (numofEntries) => {
-  let csv = 'room_id, photo_url, description, verified';
   for (let i = 1; i <= numofEntries; i++) {
     let room_id = i;
+    let room_name = faker.lorem.word() + (i%10000).toString();
     let photo_url = PHOTO_URL + getRandomIntInclusive(1, 75) + '.jpg';
     let description = faker.lorem.sentence();
     let verified = !Math.floor(Math.random() * 2);
-    csv = csv + `\n ${room_id}, ${photo_url}, ${description}, ${verified}`;
+    console.log(`\n ${room_id}, ${room_name}, ${photo_url}, ${description}, ${verified}`);
   }
-  return csv;
-}
+  return true;
+};
 
-console.log(photos(100));
+photos(1000000);
 
-// fs.writeFile('data.csv', photos(100), 'utf-8', (err) => {
-//   if (err) throw err;
-//   console.log('Success!')
-// })
+// console.log(photos(1000000));
 
 // This just in from Fred about using file compression during the data generation step…
 //
