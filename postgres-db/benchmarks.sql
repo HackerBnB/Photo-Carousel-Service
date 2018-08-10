@@ -1,0 +1,4 @@
+\c homely;
+
+EXPLAIN ANALYZE SELECT * FROM photos
+  WHERE CAST(room_id AS INTEGER) > 9000000 AND CHAR_LENGTH(description) >= 100;
