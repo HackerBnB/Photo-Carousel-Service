@@ -9,47 +9,29 @@ const getRandomIntInclusive = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
 };
 
-const rooms = (numofEntries) => {
-  let csv = 'room_id, room_name, verified';
-  for (let i = 1500001; i <= numofEntries; i++) {
-    const roomId = i;
-    const roomName = 'room' + i.toString();
-    const verified = !Math.floor(Math.random() * 2);
-    const photos = [];
-    for (let j = 1; j <= getRandomIntInclusive(1, 10); j++) {
-      let photo = {};
-      photo[`${PHOTO_URL + getRandomIntInclusive(1, 75)}.jpg`] = faker.lorem.sentence();
-      photos.push(photo);
-    };
-    //console.log(photos);
-    csv = csv + `\n ${roomId}, ${roomName}, ${JSON.stringify(photos)}`;
-  }
-  return csv;
-};
-
 const dataGenerator = (n) => {
   for (let file = 1; file <= n; file++) {
     const rooms = (numofEntries) => {
-      let csv = 'room_id, room_name, verified, photos';
-      for (let i = 50000*(file - 1) + 1; i <= numofEntries; i++) {
+      let tsv = '';
+      for (let i = 500000*(file - 1) + 1; i <= numofEntries; i++) {
         const roomId = i;
         const roomName = 'room' + i.toString();
         const verified = !Math.floor(Math.random() * 2);
         const photos = [];
-        for (let j = 1; j <= getRandomIntInclusive(1, 10); j++) {
+        for (let j = 1; j <= 5; j++) {
           let photo = {};
           photo[`${PHOTO_URL + getRandomIntInclusive(1, 75)}.jpg`] = faker.lorem.sentence();
           photos.push(photo);
         };
         //console.log(photos);
-        csv = csv + `\n ${roomId}, ${roomName}, ${verified}, ${JSON.stringify(photos)}`;
+        tsv = tsv + `${roomId}\t${roomName}\t${verified}\t${JSON.stringify(photos)}\n`;
       }
-      return csv;
+      return tsv;
     };
     console.time('test');
-    fs.writeFile(`../data/cassandra_${file}.csv`, rooms(file*50000), 'utf-8', (err) => {
+    fs.writeFile(`../data/cassandra_${file}.tsv`, rooms(file*500000), 'utf-8', (err) => {
       if (err) throw err;
-      console.log(`Success writing ${file*50000} records`);
+      console.log(`Success writing ${file*500000} records`);
     });
     console.timeEnd('test');
   };
