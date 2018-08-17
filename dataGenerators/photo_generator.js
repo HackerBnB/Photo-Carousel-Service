@@ -18,7 +18,7 @@ const dataGenerator = (n) => {
         const photoUrl = PHOTO_URL + getRandomIntInclusive(1, 75) + '.jpg';
         //const photoUrl = getRandomIntInclusive(1, 75).toString();
         const photoDescription = faker.lorem.sentence();
-        csv = csv + `\n ${roomId}, ${photoUrl}, ${photoDescription}`;
+        csv = csv + `\n${roomId}, ${photoUrl}, ${photoDescription}`;
       }
       return csv;
     };

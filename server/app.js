@@ -1,8 +1,13 @@
 const express = require('express');
-const routes = require('./../routes');
+const routes = require('../db/router.js');
 const path = require('path');
+const morgan = require('morgan');
+const cors = require('cors');
 
 const app = express();
+
+app.use(morgan('dev'));
+app.use(cors());
 
 app.set('port', process.env.PORT || 3004);
 
@@ -22,7 +27,12 @@ app.get('/', function(req, res) {
 app.use(express.static('public/'));
 app.use(express.static('client/dist'));
 
-app.get('/rooms/:id', function(req, res) {
+app.get('/rooms/roomID/:id', function(req, res) {
+  const reactPath = path.join(__dirname, '../public/index.html');
+  res.sendFile(reactPath);
+});
+
+app.get('/rooms/roomName/:name', function(req, res) {
   const reactPath = path.join(__dirname, '../public/index.html');
   res.sendFile(reactPath);
 });

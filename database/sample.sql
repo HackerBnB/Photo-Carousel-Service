@@ -2,13 +2,13 @@
 -- FROM pg_stat_get_activity(NULL::integer)
 -- WHERE datid=(SELECT oid from pg_database where datname = 'homely');
 
--- DROP DATABASE IF EXISTS homely;
+-- DROP DATABASE IF EXISTS sample;
 
--- CREATE DATABASE homely;
+-- CREATE DATABASE sample;
 
-\c homely;
+\c sample;
 
-DROP TABLE IF EXISTS rooms CASCADE;
+DROP TABLE IF EXISTS rooms;
 CREATE TABLE rooms(
   room_id SERIAL NOT NULL PRIMARY KEY,
   room_name VARCHAR(120) NOT NULL,
@@ -22,8 +22,8 @@ CREATE TABLE rooms(
 --   photo_description VARCHAR(200) NOT NULL
 -- );
 
-COPY rooms (room_name, verified) FROM '/Users/katietruong/Documents/HR/SDC/Photo-Carousel-Service/data/rooms_1.csv' WITH DELIMITER ',' CSV HEADER;
-COPY rooms (room_name, verified) FROM '/Users/katietruong/Documents/HR/SDC/Photo-Carousel-Service/data/rooms_2.csv' WITH DELIMITER ',' CSV HEADER;
+COPY rooms (room_name, verified) FROM '/Users/katietruong/Documents/HR/SDC/Photo-Carousel-Service/data/sample_rooms_1.csv' WITH DELIMITER ',' CSV HEADER;
+COPY rooms (room_name, verified) FROM '/Users/katietruong/Documents/HR/SDC/Photo-Carousel-Service/data/sample_rooms_2.csv' WITH DELIMITER ',' CSV HEADER;
 -- COPY photos (room_id, photo_url, photo_description) FROM '/Users/katietruong/Documents/HR/SDC/Photo-Carousel-Service/data/photos_1.csv' WITH DELIMITER ',' CSV HEADER;
 -- COPY photos (room_id, photo_url, photo_description) FROM '/Users/katietruong/Documents/HR/SDC/Photo-Carousel-Service/data/photos_2.csv' WITH DELIMITER ',' CSV HEADER;
 -- COPY photos (room_id, photo_url, photo_description) FROM '/Users/katietruong/Documents/HR/SDC/Photo-Carousel-Service/data/photos_3.csv' WITH DELIMITER ',' CSV HEADER;

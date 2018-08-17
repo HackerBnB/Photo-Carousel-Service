@@ -1,14 +1,14 @@
 const fs = require('fs');
 
 const dataGenerator = (n) => {
-  for (let file = 2; file <= n; file++) {
+  for (let file = 1; file <= n; file++) {
     const rooms = (num) => {
       let csv = 'room_name, verified';
       for (let i = (file-1)*5000000+1; i <= num; i++) {
         //const roomId = i;
-        const roomName = 'room' + i.toString();
+        const roomName = `room${  i}`;
         const verified = !Math.floor(Math.random() * 2);
-        csv = csv + `\n ${roomName}, ${verified}`;
+        csv = csv + `\n${roomName}, ${verified}`;
       }
       return csv;
     };
