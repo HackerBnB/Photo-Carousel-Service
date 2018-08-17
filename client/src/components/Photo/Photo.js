@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import PhotoDisplay from '../PhotoDisplay';
 import PhotoCarousel from '../PhotoCarousel';
+import axios from 'axios';
 
 class Photo extends Component {
   constructor(props) {
@@ -17,20 +18,22 @@ class Photo extends Component {
   }
 
   componentDidMount() {
-    var room = window.location.pathname;
-    fetch('/api' + room + '/photos')
-      .then(res => {
-        return res.json();
-      })
-      .then(({ results: photos }) => {
+    const room = window.location.pathname;
+    console.log(room);
+    axios.get(`/api${room}/photos`)
+      .then((res) => {
+        console.log(res.data.rows);
         this.setState({
-          photos: photos,
-          photo: photos[0]
+          photos: res.data.rows
+        }, () => {
+          this.setState({
+            photo: this.state.photos[0]
+          })
         });
       })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch((err) => {
+        console.log('Error fetching data through axios: ', err);
+      })
   }
 
   showCarousel(e) {
@@ -55,6 +58,7 @@ class Photo extends Component {
           photos={this.state.photos}
           isHidden={this.state.isCarouselHidden}
           hideCarousel={this.hideCarousel}
+          photo={this.state.photo}
         />
       </div>
     );

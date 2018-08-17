@@ -56,6 +56,7 @@ class PhotoCarouselList extends Component {
     return (
       <div className="carousel-list-container">
         <PhotoCarouselListHeader
+          photos={this.props.photos}
           photoIdx={this.props.photoIdx}
           photo={photo}
           photosCount={this.props.photos.length}

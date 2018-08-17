@@ -48,7 +48,7 @@ db.Photo.remove({}).exec(function(err, results) {
 
   Promise.all(inProgressDataBaseEntrys)
     .then(function(results) {
-      console.log(results.length + ' entrys saved in DataBase');
+      console.log(results.length + ' entries saved in DataBase');
     })
     .catch(function(err) {
       console.error(err);
