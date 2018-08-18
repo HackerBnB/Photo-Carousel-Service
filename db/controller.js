@@ -39,9 +39,31 @@ insertPhoto = (req, res) => {
   });
 };
 
+changeRoomName = (req, res) => {
+  model.changeRoomName(req.params.id, req.query.roomName, (err, results) => {
+    if (err) {
+      console.log('Error! ', err);
+      return;
+    };
+    res.send(results);
+  });
+};
+
+deleteRoom = (req, res) => {
+  model.deleteRoom(req.params.id, (err, results) => {
+    if (err) {
+      console.log('Error inserting data!', err);
+      return;
+    }; 
+    res.send(results); 
+  });
+};
+
 module.exports = {
   getRoomById,
   getRoomByName,
   insertRoom,
   insertPhoto,
+  deleteRoom,
+  changeRoomName,
 };

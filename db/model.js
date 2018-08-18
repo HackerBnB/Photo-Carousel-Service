@@ -46,9 +46,25 @@ const insertPhoto = (roomID, photoUrl, photoDescription, cb) => {
   });
 };
 
+const changeRoomName = (roomID, roomName, cb) => {
+  const queryStr = `UPDATE rooms SET room_name = ${roomName} WHERE room_id = ${roomID};`;
+  connection.query(queryStr, (results) => {
+    cb(results);
+  });
+};
+
+const deleteRoom = (roomID, cb) => {
+  const queryStr = `DELETE FROM rooms WHERE room_id = ${roomID};`;
+  connection.query(queryStr, (results) => {
+    cb(results);
+  });
+};
+
 module.exports = {
   getRoomById,
   getRoomByName,
   insertRoom,
   insertPhoto,
+  deleteRoom,
+  changeRoomName,
 };
