@@ -2,7 +2,7 @@ require('newrelic');
 require('dotenv').config()
 const express = require('express');
 const routes = require('../db/router.js');
-const controller = require('./controller.js');
+//const controller = require('./controller.js');
 const model = require('./model.js');
 const path = require('path');
 const morgan = require('morgan');
@@ -67,6 +67,10 @@ const childProcess = () => {
   });
   app.get('/rooms/roomName/:name', function(req, res) {
     const reactPath = path.join(__dirname, '../public/index.html');
+    res.sendFile(reactPath);
+  });
+  app.get('/loaderio-30a60a2c099bc565b94a01792e38a81f.txt', (req, res) => {
+    const reactPath = path.join(__dirname, './loaderio-30a60a2c099bc565b94a01792e38a81f.txt');
     res.sendFile(reactPath);
   });
   app.get('/api/rooms/roomID/:id/photos/', (req, res) => {
