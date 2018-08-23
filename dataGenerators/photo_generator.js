@@ -10,7 +10,7 @@ const getRandomIntInclusive = (min, max) => {
 };
 
 const dataGenerator = (n) => {
-  for (let file = 11; file <= n; file++) {
+  for (let file = 1; file <= n; file++) {
     const photos = (numofEntries) => {
       let csv = 'roomId, photo_url, photo_description';
       for (let i = (file - 1) * 5000000 + 1; i <= numofEntries; i++) {
@@ -29,4 +29,4 @@ const dataGenerator = (n) => {
   }
 };
 
-dataGenerator(11);
+dataGenerator(1);

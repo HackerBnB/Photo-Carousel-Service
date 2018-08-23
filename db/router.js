@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const controller = require('./controller.js');
 
-router.get('/rooms/roomID/:id/photos/', controller.getRoomById);
+//router.get('/rooms/roomID/:id/photos/', controller.getRoomById);
 router.get('/rooms/roomName/:name/photos/', controller.getRoomByName);
 router.post('/rooms/', controller.insertRoom);
 router.post('/rooms/roomID/:id/photos/', controller.insertPhoto);

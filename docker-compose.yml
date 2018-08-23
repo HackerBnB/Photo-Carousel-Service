@@ -1,18 +1,19 @@
-version: "2"
+version: '2'
 services:
-  airfec:
-    container_name: airfec_photos_server
-    build: .
-    image: airfec_photos
-    ports:
-      - '80:3000'
+  redis:
+    image: "redis"
+  postgres:
+    image: "postgres:latest"
     environment:
-      - MONGODB_URI=mongo_server
-      - PORT=3000
+     POSTGRES_PASSWORD: 123
+     POSTGRES_USER: katietruong
+  web:
+    build: .
+    ports:
+     - "80:7777"
+    volumes:
+     - .:/usr/src/app
     depends_on:
-      - 'database'
-    links: 
-      - database:mongo_server
-  database:
-    container_name: mongo
-    image: mongo:latest
+      - postgres
+      - redis
+    # command: ["./wait_for_it.sh", "postgres:5432", "--", "npm", "start"]

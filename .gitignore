@@ -26,4 +26,8 @@ coverage
 build/
 dist/
 data/
+server/app2.js
+server/controller.js
+aws-sdc-key.pem
+
 
