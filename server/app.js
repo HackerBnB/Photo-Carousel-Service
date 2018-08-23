@@ -112,7 +112,7 @@ const childProcess = () => {
     }
   });
   app.post('/api/rooms', (req, res) => {
-    model.insertRoom(req.query.roomName, req.query.verified, (results) => {
+    model.insertRoom(req.query.roomName, (results) => {
       res.send(results);
     });
   });
