@@ -8,36 +8,36 @@ const path = require('path');
 const morgan = require('morgan');
 const cors = require('cors');
 const redis = require('redis');
-const cluster = require('cluster');
-const http = require('http');
-const numCPUs = require('os').cpus().length;
+// const cluster = require('cluster');
+// const http = require('http');
+// const numCPUs = require('os').cpus().length;
 const parser = require('body-parser');
 //http.globalAgent.maxSockets = 1000;
 
-const masterProcess = () => {
-  //console.log(`Master ${process.pid} is running`);
+// const masterProcess = () => {
+//   //console.log(`Master ${process.pid} is running`);
 
-  for (let i = 0; i < numCPUs; i++) {
-    //console.log(`Forking process number ${i}...`);
-    cluster.fork();
-  }
-  cluster.on('online', function(worker) {
-    //console.log('Worker ' + worker.process.pid + ' is online');
-  });
+//   for (let i = 0; i < numCPUs; i++) {
+//     //console.log(`Forking process number ${i}...`);
+//     cluster.fork();
+//   }
+//   cluster.on('online', function(worker) {
+//     //console.log('Worker ' + worker.process.pid + ' is online');
+//   });
 
-  cluster.on('exit', function(worker, code, signal) {
-      //console.log('Worker ' + worker.process.pid + ' died with code: ' + code + ', and signal: ' + signal);
-      //console.log('Starting a new worker');
-      cluster.fork();
-  });
+//   cluster.on('exit', function(worker, code, signal) {
+//       //console.log('Worker ' + worker.process.pid + ' died with code: ' + code + ', and signal: ' + signal);
+//       //console.log('Starting a new worker');
+//       cluster.fork();
+//   });
 
-  // process.exit();
-};
+//   // process.exit();
+// };
 
-const childProcess = () => {
+// const childProcess = () => {
   //console.log(`Worker ${process.pid} started`);
 
-  const port = process.env.PORT || 80;
+  const port = process.env.PORT || 3004;
   const compression = require('compression');
   const app = express();
   app.use(compression())
@@ -45,7 +45,7 @@ const childProcess = () => {
   app.use(parser.urlencoded({ extended: true }));
   app.use(cors());
   app.use(morgan('dev'));
-  app.set('port', process.env.PORT || 80);
+  app.set('port', process.env.PORT || 3004);
 
   const client = redis.createClient();
 
@@ -134,10 +134,10 @@ const childProcess = () => {
   });
 
   app.listen(port, () => console.log(`Listening on port ${port}!`));
-};
+// };
 
-if (cluster.isMaster) {
-  masterProcess();
-} else {
-  childProcess();  
-}
+// if (cluster.isMaster) {
+//   masterProcess();
+// } else {
+//   childProcess();  
+// }
