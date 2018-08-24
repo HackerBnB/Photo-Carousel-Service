@@ -12,7 +12,7 @@ const cluster = require('cluster');
 const http = require('http');
 const numCPUs = require('os').cpus().length;
 const parser = require('body-parser');
-http.globalAgent.maxSockets = 1000;
+//http.globalAgent.maxSockets = 1000;
 
 const masterProcess = () => {
   //console.log(`Master ${process.pid} is running`);
@@ -37,7 +37,7 @@ const masterProcess = () => {
 const childProcess = () => {
   //console.log(`Worker ${process.pid} started`);
 
-  const port = process.env.PORT || 3004;
+  const port = process.env.PORT || 80;
   const compression = require('compression');
   const app = express();
   app.use(compression())
@@ -45,7 +45,7 @@ const childProcess = () => {
   app.use(parser.urlencoded({ extended: true }));
   app.use(cors());
   app.use(morgan('dev'));
-  app.set('port', process.env.PORT || 3004);
+  app.set('port', process.env.PORT || 80);
 
   const client = redis.createClient();
 
@@ -71,6 +71,10 @@ const childProcess = () => {
   });
   app.get('/loaderio-30a60a2c099bc565b94a01792e38a81f.txt', (req, res) => {
     const reactPath = path.join(__dirname, './loaderio-30a60a2c099bc565b94a01792e38a81f.txt');
+    res.sendFile(reactPath);
+  });
+  app.get('/loaderio-438441fd51a84bb2bc6eb2d4d1049bcc.txt', (req, res) => {
+    const reactPath = path.join(__dirname, './loaderio-438441fd51a84bb2bc6eb2d4d1049bcc.txt');
     res.sendFile(reactPath);
   });
   app.get('/api/rooms/roomID/:id/photos/', (req, res) => {
