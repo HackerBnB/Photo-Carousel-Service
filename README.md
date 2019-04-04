@@ -1,15 +1,16 @@
-# Airbnb Photo Component
+# Vacay.io Photo Component
 
-> This is an mock-up airbnb booking component built during the Hack Reactor immersive's Front End Capstone project.
+> This is an mock-up airbnb booking component built during the Hack Reactor immersive's Capstone project.
 
 > This project is intended to work as a full-stack microservice integrated with my team's microservices to form a complete airbnb single item page.
 
 ## Related Projects
 
-- https://github.com/airfec/nick
-- https://github.com/airfec/ozge
-- https://github.com/airfec/ricky
-- https://github.com/airfec/marcellino
+- https://github.com/vacay-io/Photo-Carousel-Service
+- https://github.com/vacay-io/Booking-Service
+- https://github.com/vacay-io/Calendar-Service
+- https://github.com/vacay-io/Reviews-Service
+- https://github.com/vacay-io/Product-Info-Service
 
 ## Table of Contents
 
