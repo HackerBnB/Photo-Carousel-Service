@@ -76,7 +76,7 @@ npm test
 ```
 
 ## API Documentation:
-- GET: '/api/photos/:id': Get all photos of a particular room, where id is the room ID.
-- POST: '/api/photos/:id': Post a photo to a particular room
-- PUT: '/api/photos/:id': Modify the information of a particular room
-- DELETE: '/api/photos/:id': Delete photos of a particular room.
+- GET: `/api/photos/:id`: Get all photos of a particular room, where id is the room ID.
+- POST: `/api/photos/:id`: Post a photo to a particular room
+- PUT: `/api/photos/:id`: Modify the information of a particular room
+- DELETE: `/api/photos/:id`: Delete photos of a particular room.
